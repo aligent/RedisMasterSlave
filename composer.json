@@ -1,0 +1,9 @@
+{
+  "name":"aligent/redismasterslave",
+  "type":"magento-module",
+  "homepage":"https://github.com/aligent/RedisMasterSlave",
+  "description":"Synchronises cache flushes across a collection of slave Redis caches.",
+  "require":{
+      "magento-hackathon/magento-composer-installer":"*"
+  }
+}
