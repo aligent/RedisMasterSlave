@@ -1,0 +1,2 @@
+app/etc/modules/Aligent_RedisMasterSlave.xml app/etc/modules/Aligent_RedisMasterSlave.xml
+app/code/community/Aligent/RedisMasterSlave app/code/community/Aligent/RedisMasterSlave

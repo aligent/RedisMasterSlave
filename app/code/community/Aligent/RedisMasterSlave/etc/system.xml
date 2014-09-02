@@ -1,0 +1,36 @@
+<config>
+    <tabs>
+        <aligent translate="label" module="aligent_redismasterslave">
+            <label>Aligent</label>
+            <sort_order>9999</sort_order>
+        </aligent>
+    </tabs>
+    <sections>
+        <aligent_redismasterslave translate="label" module="aligent_redismasterslave">
+            <label>Redis Master/Slave</label>
+            <tab>aligent</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>1000</sort_order>
+            <show_in_default>1</show_in_default>
+            <groups>
+                <redismasterslave translate="label" module="aligent_redismasterslave">
+                    <label>Redis Master/Slave</label>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <fields>
+                        <slaves translate="label comment">
+                            <label>External Website Mapping</label>
+                            <frontend_model>aligent_redismasterslave/adminhtml_system_config_form_field_redisslaves</frontend_model>
+                            <backend_model>adminhtml/system_config_backend_serialized_array</backend_model>
+                            <sort_order>500</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Adds additional redis caches that should be flushed when the master redis cache is flushed. IMPORTANT: Ensure all redis caches are using the same prefix by setting the cache/id_prefix property in local.xml]]></comment>
+                        </slaves>
+                    </fields>
+                </redismasterslave>
+            </groups>
+        </aligent_redismasterslave>
+    </sections>
+</config>
