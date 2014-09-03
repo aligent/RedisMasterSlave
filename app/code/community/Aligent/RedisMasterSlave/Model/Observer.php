@@ -35,11 +35,16 @@ class Aligent_RedisMasterSlave_Model_Observer extends Mage_Core_Model_Abstract {
 
 
     protected function flushTags(array $tags) {
+        if (empty($tags)) {
+            // If tags are empty, this suggests that a complete cache flush is required
+            $tags = array(Mage_Core_Model_App::CACHE_TAG);
+        }
+
         $tags = $this->prefixTags($tags);
-        foreach ($this->getRedisSlaves() as $slave) {
+        foreach ($this->getRedisSlaves() as $id => $slave) {
             $success = $slave->clean(Zend_Cache::CLEANING_MODE_MATCHING_ANY_TAG, $tags);
             if(!$success) {
-                Mage::log("Unable to flush cache at host " . $slave['server'], Zend_Log::ERR);
+                Mage::log("Unable to flush cache at host " . $id, Zend_Log::ERR);
             }
         }
     }
@@ -51,7 +56,7 @@ class Aligent_RedisMasterSlave_Model_Observer extends Mage_Core_Model_Abstract {
             if ($slaveConfigs) {
                 foreach ($slaveConfigs as $slaveConfig) {
                     try {
-                        $this->slaves[] = new Cm_Cache_Backend_Redis($slaveConfig);
+                        $this->slaves[$slaveConfig['server']] = new Cm_Cache_Backend_Redis($slaveConfig);
                     } catch (Exception $e) {
                         Mage::log("Unable to connect to slave redis host " . $slaveConfig['server'], Zend_Log::ERR);
                     }
